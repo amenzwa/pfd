@@ -1,4 +1,4 @@
-module BinoHeapTests exposing (..)
+module SplayHeapTests exposing (..)
 
 -- Author: Amen Zwa, Esq.
 -- Copyright 2023 sOnit, Inc.
