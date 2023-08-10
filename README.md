@@ -43,6 +43,31 @@ Once all those bits have been installed, we can run the PFD tests, from the top 
 $ elm-test
 ```
 
+# ORGANISATION
+
+The Elm implementations are organised as follows under the `~/pdf/src/` source directory:
+
+- `Heap`
+  - `BinoHeap.elm`—3.2 Binomial Heaps p.20
+    - `BinoHeap` is a heap represented with a binomial tree. A binomial tree is defined as follows: a binomial tree of rank $0$ is a single node; a binomial tree of rank $r + 1$ is formed by linking two binomial trees of rank $r$, making one tree the left-most child of the other.
+  - `LeftHeap.elm`—3.1 Leftist Heaps p.17
+    - `LeftHeap` is a heap-ordered binary tree that satisfied the *leftist property*: the rank of any left child is at least as large as the rank of its right sibling.
+  - `PairHeap.elm`—5.5 Pairing Heaps p.52
+    - `PairHeap` is a pairing heap. It is named after the pair-wise merging of the subtrees during the delete operation.
+  - `SplayHeap.elm`—5.4 Splay Heaps p.46
+    - `SplayHeap` is a heap represented with a splay tree.
+- `Queue`
+  - `LfrQueue.elm`—5.2 Queues p.42
+    - `LfrQueue` is a FIFO queue represented with a pair of lists, front and rear.
+- `Set`
+  - `BstSet.elm`—2.2 Binary Search Trees p.11
+    - `BstSet` is a set represented with an ordinary binary search tree.
+  - `RbtSet.elm`—3.3 Red-Black Trees p.24
+    - `RbtSet` is a set represented with a red-black tree, a type of balanced binary search tree.
+- `Stack`
+  - `LStack.elm`—2.1 Lists p.7
+    - `LStack` is a LIFO stack represented with the Elm built-in list.
+
 # STUDY
 
 When you study Okasaki's PFD, and indeed any mathematical inclined textbook, read it in at least three passes: scan, dive, and climb.
