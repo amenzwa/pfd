@@ -105,7 +105,7 @@ insTree x t =
 balance : Color -> a -> Set a -> Set a -> Set a
 balance color data left right =
     case ( color, data, ( left, right ) ) of
-        -- Elm tuples are limited to 3 elements
+        -- Elm tuples are limited to 3 elements, so nest (left, right)
         ( Blk, z, ( T Red y (T Red x a b) c, d ) ) ->
             T Red y (T Blk x a b) (T Blk z c d)
 

@@ -1,9 +1,13 @@
-module Heap.BinoHeap exposing (Heap, del, empty, ins, isEmpty, merge, min, size)
+module Heap.BinoHeap exposing (Heap, del, empty, ins, isEmpty, merge, min, numTrees, size)
 
 {-| Binomial Heap
 
 BinoHeap is a collection, represented by a list, of heap-ordered binomial trees
 in which no two trees have the same rank.
+Just as the list is an analogue of natural numbers,
+the binomial heap is an analogue of binary numbers:
+- representation: binomial heap of size n corresponds to 2^n
+- operations: empty is 0, delete is (-1), insert is (+1), merge is a + b, link is arithmetic carry
 See 3.2 Binomial Heaps p.20 and Figure 3.4 Binomial heaps p.24.
 
 A binomial tree is defined by rank:
@@ -14,7 +18,7 @@ A binomial tree is defined by rank:
 
 -}
 
-import List exposing (foldl, reverse)
+import List exposing (foldl, length, reverse)
 
 
 
@@ -87,6 +91,8 @@ isEmpty : Heap a -> Bool
 isEmpty h =
     h == []
 
+numTrees : Heap a -> Int
+numTrees h = length h
 
 rank : Tree a -> Int
 rank (Node r _ _) =

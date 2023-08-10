@@ -4,7 +4,7 @@ module BinoHeapTests exposing (..)
 -- Copyright 2023 sOnit, Inc.
 
 import Expect
-import Heap.PairHeap exposing (..)
+import Heap.BinoHeap exposing (..)
 import Test exposing (..)
 
 
@@ -38,7 +38,7 @@ suite =
                     h =
                         ins 7 empty |> ins 3 |> ins 6 |> ins 0 |> ins 8 |> ins 4 |> ins 2 |> ins 1 |> ins 5 |> ins 9
                 in
-                Expect.equal (Heap.PairHeap.min h) 0
+                Expect.equal (Heap.BinoHeap.min h) 0
         , test "deletes the minimum element" <|
             \_ ->
                 let
@@ -63,4 +63,15 @@ suite =
                         empty
                 in
                 Expect.equal (isEmpty h) True
+        , test "assert tree count" <|
+            -- numTrees(h) <= floor(log(n + 1)); see p.22
+            \_ ->
+                let
+                    h =
+                        ins 7 empty |> ins 3 |> ins 6 |> ins 0 |> ins 8 |> ins 4 |> ins 2 |> ins 1 |> ins 5 |> ins 9
+
+                    n =
+                        toFloat (size h)
+                in
+                Expect.equal (numTrees h <= (logBase 2.0 (n + 1.0) |> floor)) True
         ]
