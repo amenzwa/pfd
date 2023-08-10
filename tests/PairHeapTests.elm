@@ -1,4 +1,4 @@
-module SplayHeapTests exposing (..)
+module PairHeapTests exposing (..)
 
 -- Author: Amen Zwa, Esq.
 -- Copyright 2023 sOnit, Inc.
@@ -11,7 +11,7 @@ import Test exposing (..)
 
 suite : Test
 suite =
-    describe "BinoHeap module"
+    describe "PairHeap module"
         [ test "inserts elements" <|
             \_ ->
                 let

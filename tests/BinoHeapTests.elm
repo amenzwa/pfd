@@ -4,12 +4,9 @@ module BinoHeapTests exposing (..)
 -- Copyright 2023 sOnit, Inc.
 
 import Expect
-import Heap.SplayHeap exposing (..)
+import Heap.PairHeap exposing (..)
 import Test exposing (..)
 
-
-
--- BinoHeap
 
 
 suite : Test
@@ -41,7 +38,7 @@ suite =
                     h =
                         ins 7 empty |> ins 3 |> ins 6 |> ins 0 |> ins 8 |> ins 4 |> ins 2 |> ins 1 |> ins 5 |> ins 9
                 in
-                Expect.equal (Heap.SplayHeap.min h) 0
+                Expect.equal (Heap.PairHeap.min h) 0
         , test "deletes the minimum element" <|
             \_ ->
                 let

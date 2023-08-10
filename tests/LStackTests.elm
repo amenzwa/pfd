@@ -9,9 +9,6 @@ import Test exposing (..)
 
 
 
--- LStack
-
-
 suite : Test
 suite =
     describe "LStack module"

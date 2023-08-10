@@ -9,9 +9,6 @@ import Test exposing (..)
 
 
 
--- BstStack
-
-
 suite : Test
 suite =
     describe "BstSet module"

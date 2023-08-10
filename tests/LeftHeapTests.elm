@@ -10,9 +10,6 @@ import Test exposing (..)
 
 
 
--- LeftHeap
-
-
 suite : Test
 suite =
     describe "LeftHeap module"

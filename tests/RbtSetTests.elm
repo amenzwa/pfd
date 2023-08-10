@@ -10,9 +10,6 @@ import Test exposing (..)
 
 
 
--- RbtSet
-
-
 suite : Test
 suite =
     describe "RbtSet module"

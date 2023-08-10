@@ -9,9 +9,6 @@ import Test exposing (..)
 
 
 
--- LfrQeueue
-
-
 suite : Test
 suite =
     describe "LfrQeueue module"
