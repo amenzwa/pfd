@@ -1,49 +1,48 @@
-module LStackTests exposing (..)
+module LfrQueueTests exposing (..)
 
 -- Author: Amen Zwa, Esq.
 -- Copyright 2023 sOnit, Inc.
 
 import Expect
-import Stack.LStack exposing (..)
+import Queue.LfrQueue exposing (..)
 import Test exposing (..)
 
 
 
--- LStack
+-- LfrQeueue
 
 
 suite : Test
 suite =
-    describe "LStack module"
-        [ test "pushes elements" <|
+    describe "LfrQeueue module"
+        [ test "enqueues elements" <|
             \_ ->
                 let
                     s =
-                        push 0 empty |> push 1 |> push 2
+                        enq 1 empty |> enq 2 |> enq 3
                 in
                 Expect.equal (size s) 3
-        , test "peeks the next element to be popped" <|
+        , test "peeks the next element to be dequeued" <|
             \_ ->
-                case push 0 empty |> push 1 |> push 2 |> peek of
+                case enq 1 empty |> enq 2 |> enq 3 |> peek of
                     Nothing ->
                         -- impossible case; force failure
                         Expect.equal 0 -1
 
                     Just x ->
-                        Expect.equal x 2
-        , test "pops the last-pushed element" <|
+                        Expect.equal x 1
+        , test "dequeues the first-enqueued element" <|
             \_ ->
-                case push 0 empty |> push 1 |> push 2 |> pop of
-                    Err _ ->
-                        Expect.equal 0 -1
-
-                    Ok s ->
-                        Expect.equal (size s) 2
+                let
+                    s =
+                        enq 1 empty |> enq 2 |> enq 3 |> deq
+                in
+                Expect.equal (size s) 2
         , test "returns size" <|
             \_ ->
                 let
                     n =
-                        push 0 empty |> push 1 |> push 2 |> size
+                        enq 1 empty |> enq 2 |> enq 3 |> size
                 in
                 Expect.equal n 3
         , test "checks for emptiness" <|
