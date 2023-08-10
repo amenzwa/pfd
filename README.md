@@ -65,6 +65,8 @@ For instance, Elm limits tuples to triples. While this restriction can be justif
 
 And Elm does not allow inner (nested) functions. Again, this is an oft-used technique in FP. It is used to avoid polluting the top-level namespace with tonnes of little utility functions that are used only in one function. The lack of inner functions is unwholesome.
 
+Another irksome trait of Elm is its lack of the $\bot$ crash facility, as in Standard ML `raise` or Haskell `error`, thus mandating the use of `Result`, everywhere. This, however, makes sense in the front-end context, since the user should never see a crash. But in the education or demonstration back-context like this project, it is mighty inconvenient. So, to simulate a $\bot$ crash, I force an infinite recursion, thereby inducing a [stack overflow](https://en.wikipedia.org/wiki/Stack_overflow) crash. The absence of a $\bot$ crasher is unhelpful.
+
 Elm's community-standard formatter tends to spread the code out vertically, instead of horizontally. Often, a variable would show up on a line, all by its lonesome. But it is the format upon which the Elm community has settled. They justify it as a means to enable everyone to read anyone else's code. This is one of those weak-kneed arguments clung to by every strong-arm majority. In any case, we play by their rules, on their court. The community prides itself on this and other intolerant conduct, which is unfortunate.
 
 But these amount to mere inconveniences, and there are workarounds that do not detract from Elm's innate elegance. I hope young CS students and IT practitioners would at least give Elm a chance. It can expand their perspectives. That this generation has free access to solid tools, like Elm and other open-source software, is indeed fortunate.
