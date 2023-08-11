@@ -70,7 +70,7 @@ The Elm implementations are organised as follows under the `~/pdf/src/` source d
 
 # STUDY
 
-When you study Okasaki's PFD, and indeed any mathematical inclined textbook, read it in at least three passes: scan, dive, and climb.
+When you study Okasaki's PFD, and indeed any mathematically inclined textbook, read it in at least three passes: scan, dive, and climb.
 
 First, *scan* the chapter. Pick up some key terms and concepts. Take in the figures. Do not worry about understanding every concept you encounter; just collect the key phrases.
 
