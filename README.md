@@ -90,9 +90,11 @@ Everyone knows what lazy evaluation is but most programmers today do not use it.
 
 There is a fundamental conflict between the amortisation algorithmic analysis technique and purely functional data structures. See Chapters 6 p.57. Traditional algorithms analysis is imperative by design. It assumes the ephemeral (mutable) nature of data structures and relies on the mutator being a single thread of computation. But purely function data structures are by nature persistent (immutable). Any alteration to an existing data structure produces a new copy thereof. And being read-only data structures, they are designed for simultaneous use by multiple threads of computation. Persistence thus breaks amortisation and invalidates the theoretical performance guarantees attached to amortised data structures. It turns out that lazy evaluation is the mediator that restores peace between the two.
 
-It is no surprise, then, that more than a third of Okasaki's book is devoted to lazy data structures. But like all modern programming languages, Elm lacks built-in lazy evaluation mechanisms. Indeed, Standard ML does not have built-in lazy evaluation mechanisms either. But there are non-standards-compliant lazy extensions to the language. Elm has no such lazy extensions at the language level. There was an Elm package that supported basic facilities of lazy evaluation, but it is not compatible with Elm 0.19.1, the latest version at the start of this project.
+It is no surprise, then, that more than a third of Okasaki's book is devoted to lazy data structures. But like all modern programming languages, Elm lacks built-in lazy evaluation mechanisms. Indeed, Standard ML does not have built-in lazy evaluation mechanisms either. But there are non-standards-compliant lazy extensions to the language. Okasaki used one such extension to implement the amortised, lazy data structures.
 
-I have not decided how to incorporate laziness to this Elm project, mainly because I have been lazy. If laziness is good for the goose, it ought to be so for the gander.
+Elm has no lazy extensions at the language level. There was an [Elm package](https://package.elm-lang.org/packages/maxsnew/lazy/latest/Lazy) that supported basic facilities of lazy evaluation, but it has been deprecated as of Elm 0.19.1, the latest version at the start of this project. As is the wont of the Elm community, there is a [revival](https://github.com/eeue56/elm-lazy) of this old library.
+
+I could use one of those revivals, or implement a new library designed to match Okasaki's style more closely. I have not decided how best to incorporate laziness into this project, mainly because I have been lazy.
 
 ## *features or the lack thereof*
 
