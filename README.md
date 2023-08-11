@@ -84,9 +84,21 @@ I have documented every module with detailed citations to PFD, chapters, figures
 
 # CAUTION
 
-Given Elm's front-end focus, it is not without shortcomings, when misused, as it were, in the back-end context, as we do here in this project.
+## *laziness and its virtues*
 
-For instance, Elm limits tuples to triples. While this restriction can be justified on philosophical grounds, it is not a practicable choice. It is true that tuples should only be used to represent small product types, like *Complex*, and *Point*. But in FP, pattern matching against tuples is common as clay and, if used judiciously, is a powerful, convenient technique. Clearly, no one should use 10- or 20-tuples. But forcibly limiting it to a triple is unkind.
+Everyone knows what lazy evaluation is but most programmers today do not use it. This is because all popular modern languages are OO-FP hybrids with a serious leaning toward the imperative. When a language evaluates expressions only when necessary, and only up to the point necessary, then memoise the computed values for subsequent reuse, the language is said to use the *lazy evaluation* strategy. It is an optimal implementation of the $\lambda$-calculus notion of *normal-order reduction*.
+
+There is a fundamental conflict between the amortisation algorithmic analysis technique and purely functional data structures. See Chapters 6 p.57. Traditional algorithms analysis is imperative by design. It assumes the ephemeral (mutable) nature of data structures and relies on the mutator being a single thread of computation. But purely function data structures are by nature persistent (immutable). Any alteration to an existing data structure produces a new copy thereof. And being read-only data structures, they are designed for simultaneous use by multiple threads of computation. Persistence thus breaks amortisation and invalidates the theoretical performance guarantees attached to amortised data structures. It turns out that lazy evaluation is the mediator that restores peace between the two.
+
+It is no surprise, then, that more than a third of Okasaki's book is devoted to lazy data structures. But like all modern programming languages, Elm lacks built-in lazy evaluation mechanisms. Indeed, Standard ML does not have built-in lazy evaluation mechanisms either. But there are non-standards-compliant lazy extensions to the language. Elm has no such lazy extensions at the language level. There was an Elm package that supported basic facilities of lazy evaluation, but it is not compatible with Elm 0.19.1, the latest version at the start of this project.
+
+I have not decided how to incorporate laziness to this Elm project, mainly because I have been lazy. If laziness is good for the goose, it ought to be so for the gander.
+
+## *features or the lack thereof*
+
+Elm has *parametric polymorphism* in its algebraic data types, but it does not have *ad hoc polymorphism*, neither C++-style function overloading nor Haskell-style type classes. In earlier versions, Elm supported operator overloading, but it was removed in v0.19. Given the narrow scope and small size of this project, however, Elm's lack of ad hoc polymorphism is not an infirmity.
+
+Likewise, Elm 0.19 limits tuples to triples. While this restriction can be justified on philosophical grounds, it is not a practicable choice. It is true that tuples should only be used to represent small product types, like *Complex*, and *Point*. But in FP, pattern matching against tuples is common as clay and, if used judiciously, is a powerful, convenient technique. Clearly, no one should use 10- or 20-tuples. But forcibly limiting it to a triple is unkind.
 
 And Elm does not allow inner (nested) functions. Again, this is an oft-used technique in FP. It is used to avoid polluting the top-level namespace with tonnes of little utility functions that are used only in one function. The lack of inner functions is unwholesome.
 
@@ -94,4 +106,6 @@ Another irksome trait of Elm is its lack of the $\bot$ crash facility, as in Sta
 
 Elm's community-standard formatter tends to spread the code out vertically, instead of horizontally. Often, a variable would show up on a line, all by its lonesome. But it is the format upon which the Elm community has settled. They justify it as a means to enable everyone to read anyone else's code. This is one of those weak-kneed arguments clung to by every strong-arm majority. In any case, we play by their rules, on their court. The community prides itself on this and other intolerant conduct, which is unfortunate.
 
-But these amount to mere inconveniences, and there are workarounds that do not detract from Elm's innate elegance. I hope young CS students and IT practitioners would at least give Elm a chance. It can expand their perspectives. That this generation has free access to solid tools, like Elm and other open-source software, is indeed fortunate.
+# CONCLUSION
+
+Elm's numerous limitations amount to mere inconveniences when it is used on a small scale, like a class project or a self-study project. And there are adequate workarounds that do not detract from Elm's innate elegance and its suitability to FP studies. I hope young CS students and junior IT practitioners would at least give Elm a chance. even if just to expand their perspectives. That this generation has free access to solid tools, like Elm and other open-source software, is indeed fortunate.
