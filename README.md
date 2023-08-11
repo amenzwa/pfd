@@ -84,17 +84,41 @@ I have documented every module with detailed citations to PFD, chapters, figures
 
 # CAUTION
 
+## *syntax and semantics*
+
+In CS, we teach FP to undergraduate students, because its semantics serves as a base upon which to construct higher learning. In IT, we use FP, because these languages have cute syntax. Therein lies the dangers.
+
+Object-oriented languages (OO) has been well entrenched in IT since the early 1980s. Objects and business models fit like hand and glove. Then, why did IT folks begin flirting with FP, starting around 2010s?
+
+In the 1980s, IT began adopting OO, en masse, as a means to reign in the 1970s procedural programming (PP) paradigm's laissez-faire attitude toward mutation. OO's obsession with hiding mutations was just the right technique to civilise single-threaded PP programmes of the era, this characteristic now prevents programmes from being able to exploit the power of cheap, multi-core CPUs. Immutability is necessary for that, and OO's disciplined, hidden mutation is now the bottleneck. FP offers the salvation.
+
+[CS academics has been advising the IT industry](https://dl.acm.org/doi/pdf/10.1145/359576.359579) to mature from PP into FP, since the late 1970s, but to no avail. Now, the IT industry is drowning in objects, and they begin to appreciate FP's innate powers. So, starting around 2010s, the industry tried to make a massive shift from OO to FP.
+
+But old habits die hard. Many 1980s PP programmers began transitioning to OO, when C++ arrived on the scene. They all wrote C-style PP semantics code in C++-style OO syntax. C++, a hybrid PP-OO language, was immense popularity, due to it being the superset of C, and because most everyone in IT was then a C coder. C++ did more harm than good to the efforts of those who are trying to embrace OO, because it makes it too easy to fall back on the bad, old PP ways.
+
+Likewise, today's OO programmers are trying to adopt FP, but they keep writing OO semantics code in FP syntax. All popular, new languages that came out since 2010s have been OO-FP hybrids. And using these languages to adopt FP suffers from the same issues of the C-to-C++ transition of the 1980s.
+
+The arrival of Java in the mid 1990s helped complete the transition from PP to OO. Pure FP languages, like Haskell, Agda, Idris—and Elm—offer a disciplined way to transition from OO to FP. But it is plain to see that IT, as a whole, has shunned these paradigmatically pure FP languages, and have clung on to OO-FP hybrids. I do not believe this is an effective way forward.
+
+PP has its value. Most embedded software targeting tiny MCUs are best implemented in plain C. OO has its value. It is impedance matched to small-scale business applications and simulation software. FP has its value. Its mathematical nature and its innate immutability is perfect for scientific and technical computing, which are intensely mathematical and rely on parallel processing. So, be open to all that is available to you. But at the same time, when you are working with FP, shed your OO and PP propensities. Shun `ref`, `for`, `class`, and other indicia of the imperative paradigm, at least while you are learning to think functionally.
+
+When learning a programming language, do not focus on the *syntax*: do not object to it, do not be enthusiastic about it. The purpose of syntax is only to provide programer comfort. The real reason why we write programmes is to convey the *semantics* of the problem being solved to the machine, and more importantly, to other programmers who have to maintain our code. So, learn the language's semantics, idioms, libraries, and local cultural norms. For these reasons, I reject the notion that new language should copy the syntax of established languages. But to each his own.
+
+Do not learn a new language just because everyone else is using it; learn it because it will expand your mind effectively and solve your problems efficiently. On the other hand, an experienced programmer acquainted with all the major paradigms still requires at least a couple of years of sustained use to become proficient in a large, modern language. But one thing is clear. Elm is a tiny language equipped with many tried-and-true FP facilities. It can be learned in a couple of days, and it can be used in JavaScript web applications. You choose your poison.
+
 ## *laziness and its virtues*
 
-Everyone knows what lazy evaluation is but most programmers today do not use it. This is because all popular modern languages are OO-FP hybrids with a serious leaning toward the imperative. When a language evaluates expressions only when necessary, and only up to the point necessary, then memoise the computed values for subsequent reuse, the language is said to use the *lazy evaluation* strategy. It is an optimal implementation of the $\lambda$-calculus notion of *normal-order reduction*.
+Everyone knows what lazy evaluation is but most programmers today do not use it. This is because all popular modern languages are OO-FP hybrids with a serious leaning toward the imperative. When a language evaluates expressions only when necessary, and only up to the point necessary, then memoise the computed values for subsequent reuse, the language is said to use the *lazy evaluation* strategy. It is an optimal implementation of the $\lambda$-calculus notion of *normal-order reduction*. Laziness must not be confused with *delayed computation*, which is a computation suspended for the moment. When it is eventually resumed, it performs the whole computation in one go, and the results are not memoised.
+
+So, lazy evaluation proceeds incrementally and with caches the results for later reuse, but delayed computation does not cache the results and completes the task at once, albeit at a future time.
 
 There is a fundamental conflict between the amortisation algorithmic analysis technique and purely functional data structures. See Chapters 6 p.57. Traditional algorithms analysis is imperative by design. It assumes the ephemeral (mutable) nature of data structures and relies on the mutator being a single thread of computation. But purely function data structures are by nature persistent (immutable). Any alteration to an existing data structure produces a new copy thereof. And being read-only data structures, they are designed for simultaneous use by multiple threads of computation. Persistence thus breaks amortisation and invalidates the theoretical performance guarantees attached to amortised data structures. It turns out that lazy evaluation is the mediator that restores peace between the two.
 
 It is no surprise, then, that more than a third of Okasaki's book is devoted to lazy data structures. But like all modern programming languages, Elm lacks built-in lazy evaluation mechanisms. Indeed, Standard ML does not have built-in lazy evaluation mechanisms either. But there are non-standards-compliant lazy extensions to the language. Okasaki used one such extension to implement the amortised, lazy data structures.
 
-Elm has no lazy extensions at the language level. There was an [Elm package](https://package.elm-lang.org/packages/maxsnew/lazy/latest/Lazy) that supported basic facilities of lazy evaluation, but it has been deprecated as of Elm 0.19.1, the latest version at the start of this project. As is the wont of the Elm community, there is a [revival](https://github.com/eeue56/elm-lazy) of this old library.
+Elm has no lazy extensions at the language level. There was a [built-in Elm lazy facility](https://github.com/elm-lang/lazy), but it has been deprecated as of Elm 0.19.1, the latest version at the start of this project. As is the wont of the Elm community, there is [a revival](https://github.com/eeue56/elm-lazy) of the Elm lazy facility.
 
-I could use one of those revivals, or implement a new library designed to match Okasaki's style more closely. I have not decided how best to incorporate laziness into this project, mainly because I have been lazy.
+I have not decided how best to incorporate laziness into this project, mainly because I have been lazy.
 
 ## *features or the lack thereof*
 
@@ -110,4 +134,22 @@ Elm's community-standard formatter tends to spread the code out vertically, inst
 
 # CONCLUSION
 
-Elm's numerous limitations amount to mere inconveniences when it is used on a small scale, like a class project or a self-study project. And there are adequate workarounds that do not detract from Elm's innate elegance and its suitability to FP studies. I hope young CS students and junior IT practitioners would at least give Elm a chance. even if just to expand their perspectives. That this generation has free access to solid tools, like Elm and other open-source software, is indeed fortunate.
+Elm's numerous limitations amount to mere inconveniences when it is used in a limited way on a small scale, like a class project or a self-study project. And there are adequate workarounds that do not detract from Elm's innate elegance and its suitability to FP studies. I hope young CS students and junior IT practitioners would at least have a glance at Elm. That this generation has access to free, abundant, solid tools, like Elm and other open-source software, is indeed fortunate.
+
+## *sources for courses*
+
+If you intend to study Okasaki's PFD as the source material, you must already have taken at least the introductory courses on discrete structures (mathematics), data structures (imperative), algorithms (imperative), programming languages (all paradigms) and functional programming (declarative).
+
+Indeed, you should study other foundational CS topics—formal languages, computability theory, complexity theory, category theory, compiler theory, etc.—either in a classroom setting or in a bedroom setting. Although these are unnecessary (read irrelevant) in the modern practice of IT, they are the foundations of CS, and your possessing such knowledge will only help, not hurt, your future career, be it in academia or in industry. Here are some of the source materials I recommend:
+
+- [*Discrete Mathematics with Applications*](https://www.amazon.com/Discrete-Mathematics-Applications-Susanna-Epp-ebook/dp/B07M87BWRC?ref_=ast_author_mpb), Epp
+- [*Introduction to Algorithms*](https://www.amazon.com/Introduction-Algorithms-fourth-Thomas-Cormen/dp/026204630X/ref=sr_1_5?crid=125FU08JBU5XX&keywords=algorithms&qid=1691778898&sprefix=algorithms%2Caps%2C87&sr=8-5), Cormen
+- [*Automata, Formal Languages, and Turing Machines*](https://www.amazon.com/Automata-Formal-Languages-Turing-Machines-ebook/dp/B08K4D7Y7W/ref=sr_1_3?crid=1RD7N391HF2VR&keywords=formal+languages&qid=1691778815&sprefix=formal+languages%2Caps%2C130&sr=8-3), Sermutlu
+- [*The P v. NP Problem*](https://web.archive.org/web/20101212035424/http://www.claymath.org/millennium/P_vs_NP/Official_Problem_Description.pdf), Cook
+- [*Category Theory for Programmers*](https://github.com/hmemcpy/milewski-ctfp-pdf), Milewski
+- [*Compilers: Principles, Techniques, and Tools*](https://www.amazon.com/Compilers-Principles-Techniques-Tools-2nd/dp/0321486811), Aho
+- [*An Introduction to Functional Programming Through Lambda Calculus*](https://www.amazon.com/Introduction-Functional-Programming-Calculus-Mathematics-ebook/dp/B00CWR4USM/ref=sr_1_2?crid=ICQLIZA1AAHZ&keywords=lambda+calculus&qid=1691779183&s=digital-text&sprefix=lambda+calculus%2Cdigital-text%2C71&sr=1-2), Michaelson
+- [*Introduction to Functional Programming*](https://www.amazon.com/Introduction-Functional-Programming-International-1988-03-01/dp/B019TLUARI), Bird
+- [*Can Programming Be Liberated from the von Neumann Style? A Functional Style and Its Algebra of Programs*](https://dl.acm.org/doi/pdf/10.1145/359576.359579), Backus
+- [*A tutorial on the universality and expressiveness of fold*](https://www.cs.nott.ac.uk/~pszgmh/fold.pdf), Hutton
+- [*Why Functional Programming Matters*](https://www.cs.kent.ac.uk/people/staff/dat/miranda/whyfp90.pdf), Hughes
