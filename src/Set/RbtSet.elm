@@ -6,6 +6,11 @@ RbtSet is a set represented with a red-black tree.
 A red-black tree is a balanced binary search tree that guarantees O(lg n) time for all operations.
 See 3.3 Red-Black Trees p.24 and Figure 3.6 Red-black trees p.28.
 
+Invariants:
+
+  - No red node has a red child
+  - Every path from the root to a leaf contains the same number of black nodes
+
 -}
 
 -- Author: Amen Zwa, Esq.

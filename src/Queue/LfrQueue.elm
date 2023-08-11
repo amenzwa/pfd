@@ -4,6 +4,7 @@ module Queue.LfrQueue exposing (Queue, deq, empty, enq, isEmpty, peek, size)
 
 LfrQueue is a FIFO queue represented with a pair of lists, front and rear.
 It is one of the fastest queue implementations known.
+
 Invariants:
 
   - f is [] iff r is []
