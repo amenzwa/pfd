@@ -1,8 +1,6 @@
 # pfd
 ## *purely functional data structures in Elm*
 
-[TOC]
-
 This project reimplements in Elm the data structures presented in the book [*Purely Functional Data Structures*](https://www.amazon.com/Purely-Functional-Data-Structures-Okasaki/dp/0521663504) by Professor Okasaki (1999). Okasaki first published this material in 1996 in his [PhD dissertation](https://www.cs.cmu.edu/~rwh/students/okasaki.pdf) at CMU. The book provides Standard ML and Haskell implementations.
 
 Every popular algorithm textbook takes an unapologetically imperative stance. It was, and still is, the tradition in Computer Science (CS). For decades, functional programmers had to resort to imperative techniques that update the data structures, in place, thereby clobbering them. This approach is incongruous, inelegant, indiscreet. But it is the standard practice. Indeed, I published an earlier project, called [*CLRS*](https://github.com/amenzwa/clrs), that implements standard, imperative algorithms presented in the well known textbook [*Introduction to Algorithms*](https://www.amazon.com/Introduction-Algorithms-fourth-Thomas-Cormen/dp/026204630X) by Professors Cormen, Leiserson, Rivest, and Stein (CLRS 4ed 2022; formerly CLR 1ed 1990).
