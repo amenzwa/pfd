@@ -48,8 +48,8 @@ deq : Queue a -> Queue a
 deq q =
     case q of
         ( [], _ ) ->
-            -- force ⊥
-            deq empty
+            -- induce ⊥
+            identity deq empty
 
         ( _ :: f, r ) ->
             checkF ( f, r )

@@ -139,8 +139,8 @@ rmMinTree : Heap comparable -> ( Tree comparable, Heap comparable )
 rmMinTree h =
     case h of
         [] ->
-            -- unhandled case; force ⊥ to avoid having to return Result
-            rmMinTree []
+            -- unhandled case; induce ⊥ to avoid having to return Result
+            identity rmMinTree []
 
         [ t ] ->
             ( t, [] )

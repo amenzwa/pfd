@@ -51,8 +51,8 @@ min : Heap a -> a
 min h =
     case h of
         E ->
-            -- force ⊥
-            min empty
+            -- induce ⊥
+            identity min empty
 
         T x _ ->
             x
@@ -62,8 +62,8 @@ del : Heap comparable -> Heap comparable
 del h =
     case h of
         E ->
-            -- force ⊥
-            del empty
+            -- induce ⊥
+            identity del empty
 
         T _ t ->
             let

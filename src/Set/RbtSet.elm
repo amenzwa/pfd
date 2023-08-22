@@ -55,8 +55,8 @@ ins : comparable -> Set comparable -> Set comparable
 ins x s =
     case insTree x s of
         E ->
-            -- impossible case; force ⊥
-            ins x s
+            -- impossible case; induce ⊥
+            identity ins x s
 
         T _ y l r ->
             -- force root to be Black; see p.26

@@ -50,8 +50,8 @@ min : Heap a -> a
 min h =
     case h of
         E ->
-            -- force ⊥
-            min empty
+            -- induce ⊥
+            identity min empty
 
         T x E _ ->
             x
@@ -64,8 +64,8 @@ del : Heap a -> Heap a
 del h =
     case h of
         E ->
-            -- force ⊥
-            del empty
+            -- induce ⊥
+            identity del empty
 
         T _ E r ->
             r

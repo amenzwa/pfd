@@ -134,13 +134,19 @@ Elm has *parametric polymorphism* in its algebraic data types, but it does not h
 
 Likewise, Elm 0.19 limits tuples to triples. While this restriction can be justified on philosophical grounds, it is not a practicable choice. It is true that tuples should only be used to represent small product types, like *Complex*, and *Point*. But in FP, pattern matching against tuples is common as clay and, if used judiciously, is a powerful, convenient technique. Clearly, no one should use 10- or 20-tuples. But forcibly limiting it to a triple is unkind.
 
-Another irksome trait of Elm is its lack of the $\bot$ crash facility, as in Standard ML `raise` or Haskell `error`, thus mandating the use of `Result`, everywhere. This, however, makes sense in the front-end context, since the user should never see a crash. But in the education or demonstration back-end context like this project, it is mighty inconvenient. So, to simulate a $\bot$ crash, I force an infinite recursion, thereby inducing a [stack overflow](https://en.wikipedia.org/wiki/Stack_overflow) crash. The absence of a $\bot$ crasher is unhelpful.
+Another irksome trait of Elm is its lack of the $\bot$ crash facility, as in Standard ML `raise` or Haskell `error`, thus mandating the use of `Result`, everywhere. This, however, makes sense in the front-end context, since the user should never see a crash. But in the education or demonstration back-end context like this project, it is mighty inconvenient. So, to simulate a $\bot$ crash, I force an infinite recursion, thereby inducing a [stack overflow](https://en.wikipedia.org/wiki/Stack_overflow) crash. The absence of a $\bot$ crasher is unfortunate.
 
-Elm's community-standard formatter tends to spread the code out vertically, instead of horizontally. Often, a variable would show up on a line, all by its lonesome. But it is the format upon which the Elm community has settled. They justify it as a means to enable everyone to read anyone else's code. This is one of those weak-kneed arguments clung to by every strong-arm majority. In any case, we play by their rules, on their court. The community prides itself on this and other intolerant conduct, which is unfortunate.
+Elm's community-standard formatter tends to spread the code out vertically, instead of horizontally. Often, a variable would show up on a line, all by its lonesome. But it is the format upon which the Elm community has settled. They justify it as a means to enable everyone to read anyone else's code. This is one of those weak-kneed arguments proffered by a strong-arm majority. In any case, we play by their rules, on their court. The community distinguishes itself on this and other compliant conduct which, at times, can be unhelpful.
+
+### CORRECTIONS
+
+In the initial release, I made a wrong claim that Elm does not support inner functions. Eniac314 on GitHub pointed out my mistake. To prevent propagating this mistake, I have taken out that erroneous complaint from this document. And have refactored the auxiliary functions in my code to use the inner functions, as suggested by Eniac314.
+
+Another error on my part was to assume that I could induce a $\bot$ by simply inducing an infinite recursion. But as pointed out by Leonardo Taglialegne on GitHub, the Elm complier optimises this tail recursion, thus preventing the intended stack overflow crash. I have followed his suggestion and injected the `identity` call in front of the infinite recursion, thereby circumventing the compiler's tail-call optimisation.
 
 # CONCLUSION
 
-Elm's numerous limitations amount to mere inconveniences when it is used in a limited way on a small scale, like a class project or a self-study project. And there are adequate workarounds that do not detract from Elm's innate elegance and its suitability to FP studies. I hope young CS students and junior IT practitioners would at least have a glance at Elm. That this generation has access to free, abundant, solid tools, like Elm and other open-source software, is indeed fortunate.
+Elm's limitations enumerated above amount to mere inconveniences when it is used in a limited way on a small scale, like a class project or a self-study project. And there are adequate workarounds that do not detract from Elm's innate elegance and its suitability to FP studies. I hope young CS students and junior IT practitioners would at least have a glance at Elm. That this generation has access to free, abundant, solid tools, like Elm and other open-source software, is indeed fortunate.
 
 ## *sources for courses*
 
