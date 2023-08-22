@@ -31,7 +31,7 @@ empty =
 
 enq : a -> Queue a -> Queue a
 enq x ( f, r ) =
-    checkf ( f, x :: f )
+    checkF ( f, x :: f )
 
 
 peek : Queue a -> Maybe a
@@ -52,7 +52,7 @@ deq q =
             deq empty
 
         ( _ :: f, r ) ->
-            checkf ( f, r )
+            checkF ( f, r )
 
 
 size : Queue a -> Int
@@ -73,8 +73,12 @@ isEmpty s =
     s == empty
 
 
-checkf : Queue a -> Queue a
-checkf q =
+
+{- utilities -}
+
+
+checkF : Queue a -> Queue a
+checkF q =
     case q of
         ( [], r ) ->
             ( reverse r, [] )

@@ -92,6 +92,10 @@ isEmpty h =
     h == E
 
 
+
+{- utilities -}
+
+
 part : comparable -> Heap comparable -> ( Heap comparable, Heap comparable )
 part p h =
     case ( p, h ) of

@@ -107,6 +107,10 @@ insTree x t =
                 balance c y l (ins x r)
 
 
+
+{- utilities -}
+
+
 balance : Color -> a -> Set a -> Set a -> Set a
 balance color data left right =
     case ( color, data, ( left, right ) ) of

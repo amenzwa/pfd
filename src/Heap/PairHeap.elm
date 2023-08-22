@@ -66,6 +66,18 @@ del h =
             del empty
 
         T _ t ->
+            let
+                mergePair h_ =
+                    case h_ of
+                        [] ->
+                            E
+
+                        [ t_ ] ->
+                            t_
+
+                        t_ :: u :: v ->
+                            merge (merge t_ u) (mergePair v)
+            in
             mergePair t
 
 
@@ -82,16 +94,3 @@ size h =
 isEmpty : Heap a -> Bool
 isEmpty h =
     h == E
-
-
-mergePair : List (Heap comparable) -> Heap comparable
-mergePair h =
-    case h of
-        [] ->
-            E
-
-        [ t ] ->
-            t
-
-        t :: u :: v ->
-            merge (merge t u) (mergePair v)

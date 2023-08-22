@@ -36,6 +36,23 @@ merge h i =
             i
 
         ( (T _ x hl hr) as ht, (T _ y il ir) as it ) ->
+            let
+                rank h_ =
+                    case h_ of
+                        E ->
+                            0
+
+                        T r _ _ _ ->
+                            r
+
+                makeT x_ l r =
+                    if rank l >= rank r then
+                        -- ensure leftist property
+                        T (rank r + 1) x_ l r
+
+                    else
+                        T (rank l + 1) x_ r l
+            in
             if x <= y then
                 makeT x hl (merge hr it)
 
@@ -87,23 +104,3 @@ rSpine h =
 
         T _ x _ r ->
             x :: rSpine r
-
-
-makeT : a -> Heap a -> Heap a -> Heap a
-makeT x l r =
-    if rank l >= rank r then
-        -- ensure leftist property
-        T (rank r + 1) x l r
-
-    else
-        T (rank l + 1) x r l
-
-
-rank : Heap a -> Int
-rank h =
-    case h of
-        E ->
-            0
-
-        T r _ _ _ ->
-            r
