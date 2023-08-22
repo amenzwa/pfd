@@ -1,6 +1,8 @@
 # pfd
 ## *purely functional data structures in Elm*
 
+[TOC]
+
 This project reimplements in Elm the data structures presented in the book [*Purely Functional Data Structures*](https://www.amazon.com/Purely-Functional-Data-Structures-Okasaki/dp/0521663504) by Professor Okasaki (1999). Okasaki first published this material in 1996 in his [PhD dissertation](https://www.cs.cmu.edu/~rwh/students/okasaki.pdf) at CMU. The book provides Standard ML and Haskell implementations.
 
 Every popular algorithm textbook takes an unapologetically imperative stance. It was, and still is, the tradition in Computer Science (CS). For decades, functional programmers had to resort to imperative techniques that update the data structures, in place, thereby clobbering them. This approach is incongruous, inelegant, indiscreet. But it is the standard practice. Indeed, I published an earlier project, called [*CLRS*](https://github.com/amenzwa/clrs), that implements standard, imperative algorithms presented in the well known textbook [*Introduction to Algorithms*](https://www.amazon.com/Introduction-Algorithms-fourth-Thomas-Cormen/dp/026204630X) by Professors Cormen, Leiserson, Rivest, and Stein (CLRS 4ed 2022; formerly CLR 1ed 1990).
@@ -114,13 +116,13 @@ If a language incrementally evaluates expressions only when their values become 
 
 So, both lazy evaluation and delayed computation perform the work at some future time. Lazy evaluation proceeds incrementally and caches the results for later reuse, whereas delayed computation does not cache the results and completes the task monolithically.
 
-Languages that use *call-by-value* parameter passing mechanism are said to be eager languages, whereas those that use *call-by-need* parameter passing mechanism are said to be lazy languages. When a function is invoked with call-by-name semantics, its is passed arguments that have been fully evaluated. When a function is invoked with call-by-need semantics, its arguments are passed unevaluated, and they are evaluated only when the function needs them, and only up to a point when those needs have been satisfied. Moreover, the evaluated results are cached by the language, so those computations occur only once. That is, the language pays for computational efficiency with extra use of space.
+Languages that use *call-by-value* parameter passing mechanism are said to be eager languages, whereas those that use *call-by-need* parameter passing mechanism are said to be lazy languages. When a function is invoked with call-by-value semantics, it is passed arguments that have been fully evaluated. When a function is invoked with call-by-need semantics, its arguments are passed unevaluated, and they are evaluated only when the function needs them, and only up to a point when those needs have been satisfied. Moreover, the evaluated results are cached by the language, so those computations occur only once. So, a lazy language pays for computational efficiency with extra use of space.
 
 Note that eagerness and laziness are language-wide strategies used in evaluating expressions. But call-by-value and call-by-need apply only in the context of function calls. It just happens so that languages that use eager evaluation strategy also use call-by-value parameter passing and those that use lazy evaluation strategy also use call-by-need parameter passing, because such pairings are natural.
 
 Anyway, I just wanted to clarify the terms, because CS folks tend to bandy about these terms and IT folks tend to conflate them. Now, onward to a more pressing issue.
 
-There is a fundamental conflict between the amortisation algorithmic analysis technique and purely functional data structures. See Chapter 6 p.57. Traditional algorithms analysis is imperative by design. It assumes the ephemeral (mutable) nature of data structures and relies on the mutator being a single thread of computation. But purely function data structures are by nature persistent (immutable). Any alteration to an existing data structure produces a new copy thereof. And being read-only data structures, they are designed for simultaneous use by multiple threads of computation. Persistence thus breaks amortisation and invalidates the theoretical performance guarantees attached to amortised data structures. It turns out that lazy evaluation is the necessary mediator that restores peace between the two. See §6.2.2 p.59.
+There is a fundamental conflict between the amortisation algorithmic analysis technique and purely functional data structures. See Chapter 6 p.57. Traditional algorithms analysis is imperative by design. It assumes the ephemeral (mutable) nature of data structures and relies on the mutator being a single thread of computation. But purely function data structures are by nature perennial (immutable), which is also called persistent. Any alteration to an existing data structure produces a new copy thereof. And being read-only data structures, they are designed for simultaneous use by multiple threads of computation. Persistence thus breaks amortisation and invalidates the theoretical performance guarantees attached to amortised data structures. It turns out that lazy evaluation is the necessary mediator that restores peace between these two waring factions. See §6.2.2 p.59.
 
 It is no surprise, then, that more than a third of Okasaki's book is devoted to lazy data structures. But like all modern programming languages, Elm lacks built-in lazy evaluation mechanisms. Indeed, Standard ML does not have built-in lazy evaluation mechanisms either. But there are non-standards-compliant lazy extensions to the language. Okasaki used one such extension to implement the amortised, lazy data structures.
 
@@ -136,7 +138,7 @@ Likewise, Elm 0.19 limits tuples to triples. While this restriction can be justi
 
 Another irksome trait of Elm is its lack of the $\bot$ crash facility, as in Standard ML `raise` or Haskell `error`, thus mandating the use of `Result`, everywhere. This, however, makes sense in the front-end context, since the user should never see a crash. But in the education or demonstration back-end context like this project, it is mighty inconvenient. So, to simulate a $\bot$ crash, I force an infinite recursion, thereby inducing a [stack overflow](https://en.wikipedia.org/wiki/Stack_overflow) crash. The absence of a $\bot$ crasher is unfortunate.
 
-Elm's community-standard formatter tends to spread the code out vertically, instead of horizontally. Often, a variable would show up on a line, all by its lonesome. But it is the format upon which the Elm community has settled. They justify it as a means to enable everyone to read anyone else's code. This is one of those weak-kneed arguments proffered by a strong-arm majority. In any case, we play by their rules, on their court. The community distinguishes itself on this and other compliant conduct which, at times, can be unhelpful.
+Elm's community-standard formatter tends to spread the code out vertically, instead of horizontally. Often, a variable would show up on a line, all by its lonesome. And double-blank lines are injected just about everywhere. Given that computer monitors are wider than they are tall, this indiscriminate use of the vertical real estate is wasteful, and it diminishes the amount of information that the programmer can absorb in one glance. But it is the format upon which the Elm community has settled. They justify it as a means to enable everyone to read anyone else's code. In the days of advanced code formatters, this is one of those weak-kneed arguments proffered by a strong-armed majority. In any case, we play by their rules, on their court. The community prides itself on this and other compliant conduct which, at times, can be unhelpful.
 
 ### CORRECTIONS
 
@@ -152,13 +154,18 @@ Elm's limitations enumerated above amount to mere inconveniences when it is used
 
 If you intend to study Okasaki's PFD as the source material, you must already have taken at least the introductory courses on discrete structures (mathematics), data structures (imperative), algorithms (imperative), programming languages (all paradigms) and functional programming (declarative).
 
-Indeed, you should study other foundational CS topics—formal languages, computability theory, complexity theory, category theory, compiler theory, etc.—either in a classroom setting or in a bedroom setting. Although these are unnecessary (read irrelevant) in the modern practice of IT, they are the foundations of CS, and your possessing such knowledge will only help, not hurt, your future career, be it in academia or in industry. Here are some of the source materials I recommend:
+Indeed, you should study other foundational CS topics—formal languages, computability theory, complexity theory, category theory, compiler theory, etc.—either in a classroom setting or in a bedroom setting. Although these topics are inessential in the practice of modern, mundane IT, they are the indispensable foundations of CS, and your possessing such knowledge will only help, not hurt, your future career, be it in academia or in industry. Here are some of the source materials I recommend:
+
+### THEORY
 
 - [*Discrete Mathematics with Applications*](https://www.amazon.com/Discrete-Mathematics-Applications-Susanna-Epp-ebook/dp/B07M87BWRC?ref_=ast_author_mpb), Epp
 - [*Introduction to Algorithms*](https://www.amazon.com/Introduction-Algorithms-fourth-Thomas-Cormen/dp/026204630X/ref=sr_1_5?crid=125FU08JBU5XX&keywords=algorithms&qid=1691778898&sprefix=algorithms%2Caps%2C87&sr=8-5), Cormen
 - [*Automata, Formal Languages, and Turing Machines*](https://www.amazon.com/Automata-Formal-Languages-Turing-Machines-ebook/dp/B08K4D7Y7W/ref=sr_1_3?crid=1RD7N391HF2VR&keywords=formal+languages&qid=1691778815&sprefix=formal+languages%2Caps%2C130&sr=8-3), Sermutlu
 - [*The P v. NP Problem*](https://web.archive.org/web/20101212035424/http://www.claymath.org/millennium/P_vs_NP/Official_Problem_Description.pdf), Cook
 - [*Category Theory for Programmers*](https://github.com/hmemcpy/milewski-ctfp-pdf), Milewski
+
+### PRACTICE
+
 - [*Compilers: Principles, Techniques, and Tools*](https://www.amazon.com/Compilers-Principles-Techniques-Tools-2nd/dp/0321486811), Aho
 - [*An Introduction to Functional Programming Through Lambda Calculus*](https://www.amazon.com/Introduction-Functional-Programming-Calculus-Mathematics-ebook/dp/B00CWR4USM/ref=sr_1_2?crid=ICQLIZA1AAHZ&keywords=lambda+calculus&qid=1691779183&s=digital-text&sprefix=lambda+calculus%2Cdigital-text%2C71&sr=1-2), Michaelson
 - [*Introduction to Functional Programming*](https://www.amazon.com/Introduction-Functional-Programming-International-1988-03-01/dp/B019TLUARI), Bird
