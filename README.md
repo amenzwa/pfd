@@ -142,7 +142,7 @@ Elm's community-standard formatter tends to spread the code out vertically, inst
 
 In the initial release, I made a wrong claim that Elm does not support inner functions. Eniac314 on GitHub pointed out my mistake. To prevent propagating this mistake, I have taken out that erroneous complaint from this document. And have refactored the auxiliary functions in my code to use the inner functions, as suggested by Eniac314.
 
-Another error on my part was to assume that I could induce a $\bot$ by simply inducing an infinite recursion. But as pointed out by Leonardo Taglialegne on GitHub, the Elm complier optimises this tail recursion, thus preventing the intended stack overflow crash. I have followed his suggestion and injected the `identity` call in front of the infinite recursion, thereby circumventing the compiler's tail-call optimisation.
+Another error on my part was to assume that I could induce a $\bot$ by simply inducing an infinite recursion. But as pointed out by Leonardo Taglialegne on GitHub, the Elm complier optimises this tail recursion, thus preventing the intended stack overflow crash. I have followed his suggestion to inject the `identity` call to the left of the infinite recursive call, thereby circumventing the compiler's tail-call optimisation.
 
 # CONCLUSION
 
