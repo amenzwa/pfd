@@ -19,6 +19,8 @@ Lastly, this is an ongoing project. The initial commit, in mid 2023, includes a 
 
 # INSTALLATION
 
+At present, Git-cloning is the only way to install this project. This is acceptable, since the intended use is for small class projects of CS students. When the project has reached a level of maturity and stability, I may publish it as an Elm package.
+
 First, install Elm by following the official [installation instructions](https://guide.elm-lang.org/install/elm.html). And because Elm is technically a web framework, we need to install Node. The easiest way to install Node is through NPM. So, follow the official [installation instructions](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) for NPM. Also install VSCode, again by following the official [installation guidelines](https://code.visualstudio.com/docs/setup/setup-overview), along with the [*Elm tooling*](https://marketplace.visualstudio.com/items?itemName=Elmtooling.elm-ls-vscode) VSCode plugin. Do not use the older *Elm Language Support* plugin.
 
 Next, type in the following commands at a terminal in a directory under which you wish to clone this project. On macOS, we could go to `~/Documents/`.
