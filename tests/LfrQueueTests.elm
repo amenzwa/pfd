@@ -16,9 +16,9 @@ suite =
             \_ ->
                 let
                     s =
-                        enq 1 empty |> enq 2 |> enq 3
+                        enq 1 empty |> enq 2 |> enq 3 |> enq 2
                 in
-                Expect.equal (size s) 3
+                Expect.equal (size s) 4
         , test "peeks the next element to be dequeued" <|
             \_ ->
                 case enq 1 empty |> enq 2 |> enq 3 |> peek of

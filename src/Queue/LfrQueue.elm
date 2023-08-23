@@ -31,7 +31,7 @@ empty =
 
 enq : a -> Queue a -> Queue a
 enq x ( f, r ) =
-    checkF ( f, x :: f )
+    checkF ( f, x :: r )
 
 
 peek : Queue a -> Maybe a
