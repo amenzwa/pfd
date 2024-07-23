@@ -11,7 +11,7 @@ I chose [Elm](https://elm-lang.org), because it is a purely functional language.
 
 Be that as it may, I view Elm as a pragmatic language in which to teach CS students disciplined web development, after they have learned FP in Haskell, OCaml, or Standard ML. This project could be of use for that purpose. The primary audience of this project, therefore, is the CS students studying FP and data structures. The secondary audience is Elm users who need purely functional data structures.
 
-Officially, Elm will not support back-end (server) development work. But there are [several community projects](https://discourse.elm-lang.org/t/how-to-write-backend-in-elm/4419) to remedy this "front-end" debility. There is also [Elchemy](https://wende.github.io/elchemy/), which is Elm for the [Erlang BEAM](https://www.erlang.org/blog/a-brief-beam-primer/), a VM with performance and resilience that had been honed over the past four decades in the telecommunications industry.
+Officially, Elm will not support back-end (server) development work. There is [PineVM](https://github.com/pine-vm/pine) to remedy this "front-end-only" debility. There is also [Elchemy](https://wende.github.io/elchemy/), which is Elm for the [Erlang BEAM](https://www.erlang.org/blog/a-brief-beam-primer/), a VM with performance and resilience that had been honed over the past four decades in the telecommunications industry.
 
 I could have used [PureScript](https://www.purescript.org), another purely functional web development language that is used for both front-end and back-end work. But PureScript is just a Webskell. So, Okasaki's original Haskell implementation could readily be adapted to PureScript, perhaps even through automation. And it would be just as pointless for me to use [OCaml](https://ocaml.org), another great FP language with long-established reputation. Because OCaml is just ML with objects, Okasaki's original Standard ML implementation can be adapted to OCaml with minor syntactic tweaks.
 
@@ -47,7 +47,7 @@ $ elm-test
 
 # ORGANISATION
 
-The Elm implementations are organised as follows under the `~/pdf/src/` source directory:
+The Elm implementations are organised as follows under the `~/pfd/src/` source directory:
 
 - `Heap`
   - `BinoHeap.elm`—3.2 Binomial Heaps p.20
